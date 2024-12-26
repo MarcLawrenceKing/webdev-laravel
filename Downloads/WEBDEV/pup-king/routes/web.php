@@ -72,7 +72,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('home1', [BlogController::class, 'retrieveBlogs']);
 
-    Route::get('activity4', [BlogController::class, 'retrieveBlogs']);
+    Route::get('activity4', [BlogController::class, 'retrieveActivity4']);
 
 
     Route::get('dashboard', function () {

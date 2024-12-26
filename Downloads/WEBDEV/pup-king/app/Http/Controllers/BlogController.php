@@ -67,6 +67,64 @@ class BlogController extends Controller
             ],
         ];
 
-        return view('admin.activity4', compact('blogs'));
+        return view('admin.home1', compact('blogs'));
+    }
+
+    public function retrieveActivity4()
+    {
+        $guitars = [
+            [
+                'title' => 'PRS SE Custom',
+                'body' => 'Smooth tones, versatile for multiple genres.',
+                'img' => 'https://astrings.co.uk/cdn/shop/files/24t1.jpg?v=1727859572'
+            ],
+            [
+                'title' => 'Fender Stratocaster',
+                'body' => 'Versatile, bright tones, popular for rock and blues.',
+                'img' => 'https://media.npr.org/assets/img/2015/01/02/fender-custom-shop-john-mayer-stratocaster-v2_wide-afd388b2d1dc88ac7debc448f5fe9b76245cccad.jpg?s=1100&c=85&f=jpeg'
+            ],
+            [
+                'title' => 'Ibanez RG',
+                'body' => 'Fast neck, ideal for shredding and metal.',
+                'img' => 'https://willcuttguitars.com/cdn/shop/products/211P01I180113684-1_1200x.jpg?v=1616602907',
+            ],
+            [
+                'title' => 'Gibson Les Paul',
+                'body' => 'Rich, warm sound, known for heavy rock',
+                'img' => 'https://www.coda-music.com/media/catalog/product/cache/2ef9704120ddb26286e9628d966dedc5/0/2/027ed70c-5656-457c-ba62-5d586151889a.jpeg',
+            ],
+            [
+                'title' => 'Gibson SG',
+                'body' => 'Distinct, aggressive sound, preferred in hard rock.',
+                'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLI_JqDJqRaRQKGxUPq5RcqBYRyn5TYpPHAA&s',
+            ],
+            [
+                'title' => 'Fender Telecaster',
+                'body' => 'Crisp, cutting tone, great for country and rock',
+                'img' => 'https://images.equipboard.com/uploads/article/image/138/l_fender-jimmy-page-mirror-telecaster-review.jpg',
+            ],
+        ];
+
+        $plans = [
+            [
+                'type' => 'Public',
+                'free' => true,
+                'pro' => true,
+                'enterprise' => true,
+            ],
+            [
+                'type' => 'Private',
+                'free' => true,
+                'pro' => true,
+                'enterprise' => null,
+            ],
+            [
+                'type' => 'Permission',
+                'free' => null,
+                'pro' => true,
+                'enterprise' => true,
+            ],
+        ];
+        return view('admin.activity4', compact('guitars', 'plans'));
     }
 }
