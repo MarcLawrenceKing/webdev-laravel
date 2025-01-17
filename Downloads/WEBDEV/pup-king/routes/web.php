@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -74,6 +76,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::get('activity4', [BlogController::class, 'retrieveActivity4']);
 
+    // submit
+    Route::post('activity4', [LoginController::class, 'loginSubmit'])->name('activity4.submit');
 
     Route::get('dashboard', function () {
         return view('admin.dashboard');

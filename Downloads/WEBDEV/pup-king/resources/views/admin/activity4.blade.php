@@ -5,14 +5,29 @@
     <div class="col-md-3">
       <!-- Content for the first column -->
       <div class="p-3 border" style="background-color:#eeeeee;">
-        <form>
+        <!-- @if(Session::has('error'))
+        <div class="alert alert-danger" role="alert">
+          {{Session::get('error')}}
+        </div>
+        @endif -->
+
+        @if($errors->any())
+        @foreach($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+          {{$error}}
+        </div>
+        @endforeach
+        @endif
+
+        <form method="POST" action="{{route('activity4.submit')}}">
+          @csrf
           <div class="mb-3 d-flex" style="gap: 5px; justify-content: end; align-items:center;">
             <label for="exampleInputEmail1" class="form-label mb-0"> Email:</label>
-            <input type="email" class="form-control w-75" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input required name="username" type="email" class="form-control w-75" id="exampleInputEmail1" aria-describedby="emailHelp">
           </div>
           <div class="mb-3 d-flex" style="gap: 5px; justify-content: end; align-items:center;">
             <label for="exampleInputPassword1" class="form-label  mb-0">Password: </label>
-            <input type="password" class="form-control w-75" id="exampleInputPassword1">
+            <input required name="password" type="password" class="form-control w-75" id="exampleInputPassword1">
           </div>
           <div class="mb-3 form-check d-flex" style="gap: 10px;  justify-content: end; align-items:center;">
             <button type="submit" class="btn btn-primary">Login</button>
