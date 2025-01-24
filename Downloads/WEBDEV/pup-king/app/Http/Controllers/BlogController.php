@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -134,5 +136,75 @@ class BlogController extends Controller
             ],
         ];
         return view('admin.activity4', compact('guitars', 'plans'));
+    }
+
+    // public function sampleModel()
+    // {
+    //     $blogs = DB::table('blogs')->get();
+    //     // return $blogs;
+
+    //     return view('admin.home1', compact('blogs'));
+    // }
+
+    // public function sampleModel($id)
+    // {
+    //     //$blogs = DB::table('blogs')->get();
+
+    //     // find id from all content
+    //     //$blogs = DB::table('blogs')->find($id);
+
+    //     // get where status id == value
+    //     $blogs = DB::table('blogs')->where('status_id', '!=', $id)->get();
+
+    //     return $blogs;
+
+    //     //return view('admin.home1', compact('blogs'));
+    // }
+
+    public function sampleModel($id, $cat)
+    {
+        //$blogs = DB::table('blogs')->get();
+
+        // find id from all content
+        $blogs = DB::table('blogs')->find($id);
+
+        // get where status id == value
+        // $blogs = DB::table('blogs')
+        //     ->where('status_id', '!=', $id)
+        //     ->where('category_id', $cat)
+        //     ->get();
+
+        //same as, but using model
+
+        // $blogs = Blog::where('status_id', $id)
+        //     ->where('category_id', $cat)
+        //     ->get();
+
+        // DB::table('blogs')->insert([
+        //     'title' => 'try',
+        //     'description' => 'try',
+        //     'status_id' => 1,
+        //     'category_id' => 2,
+        //     'created_at' => date('Y-m-d H:i:s')
+        // ]);
+
+        // $blogs = DB::table('blogs')
+        //     ->where('id', $id)
+        //     ->update(['description' => '12345']);
+
+        // $blogs = Blog::all();
+
+        //$blogs = Blog::find($id);
+
+        //$blogs = Blog::findOrFail($id);
+
+        // $blogs = DB::table('blogs')
+        //     ->where('id', $id)
+        //     ->delete();
+
+        return $blogs;
+        //return $blogs->title;
+
+        //return view('admin.home1', compact('blogs'));
     }
 }

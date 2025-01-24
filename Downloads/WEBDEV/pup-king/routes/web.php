@@ -84,4 +84,6 @@ Route::group(['prefix' => 'admin'], function () {
     })->name('dashboard');
 });
 
-Route::get('/blog-data', [BlogController::class, 'index']);
+Route::get('/blog/data', [BlogController::class, 'sampleModel']);
+Route::get('/blog/data/{id}', [BlogController::class, 'sampleModel']);
+Route::get('/blog/data/{id}/{cat}', [BlogController::class, 'sampleModel']);

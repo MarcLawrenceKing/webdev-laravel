@@ -55,12 +55,12 @@
       <div class="row">
         @foreach($blogs as $blog)
         <div class="card" style="width: 18rem;">
-          <img src="{{$blog['img']}}" class="card-img-top" alt="..." style="height: 150px; width: 150px;">
+          <img src="https://i.kym-cdn.com/entries/icons/facebook/000/041/119/Screenshot_4.jpg" class="card-img-top" alt="..." style="height: 150px; width: 250px;">
           <div class="card-body">
-            <h5 class="card-title">{{$blog['title']}}</h5>
-            <p class="card-text">{{$blog['body']}}</p>
+            <h5 class="card-title">{{ $blog->title }}</h5>
+            <p class="card-text">{{ $blog->description }}</p>
 
-            @if($blog['status'] == 1)
+            @if($blog->status_id == 1)
             <a href="#" class="btn btn-primary">Go somewhere</a>
             @endif
           </div>
