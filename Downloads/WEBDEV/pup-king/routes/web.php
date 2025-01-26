@@ -82,6 +82,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('dashboard', function () {
         return view('admin.dashboard');
     })->name('dashboard');
+
+    Route::get('activity9', [BlogController::class, 'retrieveActivity9']);
+    Route::post('activity9', [BlogController::class, 'blogSubmit'])->name('activity9.submit');
 });
 
 Route::get('/blog/data', [BlogController::class, 'sampleModel']);

@@ -163,10 +163,10 @@ class BlogController extends Controller
 
     public function sampleModel($id, $cat)
     {
-        //$blogs = DB::table('blogs')->get();
+        $blogs = DB::table('blogs')->get();
 
         // find id from all content
-        $blogs = DB::table('blogs')->find($id);
+        //$blogs = DB::table('blogs')->find($id);
 
         // get where status id == value
         // $blogs = DB::table('blogs')
@@ -206,5 +206,16 @@ class BlogController extends Controller
         //return $blogs->title;
 
         //return view('admin.home1', compact('blogs'));
+    }
+
+    public function retrieveActivity9()
+    {
+        $blogs = DB::table('blogs')->paginate(10);
+        // return $blogs;
+
+        $status = DB::table('status')->get();
+        $categories = DB::table('categories')->get();
+
+        return view('admin.activity9', compact('blogs', 'status', 'categories'));
     }
 }
