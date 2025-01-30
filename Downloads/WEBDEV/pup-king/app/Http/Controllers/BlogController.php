@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
+use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -10,34 +12,47 @@ use PhpParser\Node\Stmt\TryCatch;
 
 class BlogController extends Controller
 {
-    public function index()
+    // public function index()
+    // {
+    //     $blogs = [
+    //         [
+    //             'title' => 'Title one',
+    //             'body' => 'this is body 1',
+    //             'status' => '1',
+    //             'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7x2AcEbYN-8aRfJ7KQVWFUf1OAObGwCUBSg&s',
+    //         ],
+    //         [
+    //             'title' => 'Title two',
+    //             'body' => 'this is body 2',
+    //             'status' => '0',
+    //             'img' => 'https://i.pinimg.com/564x/b3/c3/ef/b3c3ef9b7bea3a3ae1c2315d0602ecf6.jpg',
+    //         ],
+    //         [
+    //             'title' => 'Title three',
+    //             'body' => 'this is body 3',
+    //             'status' => '0',
+    //             'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKjEYw0t87WVAOOptv7aTaD-0iojLThc_WpA&s',
+    //         ],
+    //         [
+    //             'title' => 'Title four',
+    //             'body' => 'this is body 4',
+    //             'img' => 'https://i.pinimg.com/736x/ee/a4/f4/eea4f4412153825cfa66a3a25fafcf49.jpg',
+    //             'status' => '1',
+    //         ],
+    //     ];
+
+    //     return $blogs;
+    // }
+
+
+    public function index(Request $request)
     {
-        $blogs = [
-            [
-                'title' => 'Title one',
-                'body' => 'this is body 1',
-                'status' => '1',
-                'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7x2AcEbYN-8aRfJ7KQVWFUf1OAObGwCUBSg&s',
-            ],
-            [
-                'title' => 'Title two',
-                'body' => 'this is body 2',
-                'status' => '0',
-                'img' => 'https://i.pinimg.com/564x/b3/c3/ef/b3c3ef9b7bea3a3ae1c2315d0602ecf6.jpg',
-            ],
-            [
-                'title' => 'Title three',
-                'body' => 'this is body 3',
-                'status' => '0',
-                'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKjEYw0t87WVAOOptv7aTaD-0iojLThc_WpA&s',
-            ],
-            [
-                'title' => 'Title four',
-                'body' => 'this is body 4',
-                'img' => 'https://i.pinimg.com/736x/ee/a4/f4/eea4f4412153825cfa66a3a25fafcf49.jpg',
-                'status' => '1',
-            ],
-        ];
+        // $blogs = Blog::with('category', 'status')
+        //     ->orderBy('created_at', 'DESC')
+        //     ->get();
+
+
+        $blogs = Category::with('blog')->get();
 
         return $blogs;
     }
@@ -210,12 +225,33 @@ class BlogController extends Controller
 
     public function retrieveActivity9()
     {
-        $blogs = DB::table('blogs')->paginate(10);
-        // return $blogs;
+        $blogs = Blog::with('category', 'stats')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(10);
 
-        $status = DB::table('status')->get();
-        $categories = DB::table('categories')->get();
+        $status = Status::all();
+        $categories = Category::all();
 
         return view('admin.activity9', compact('blogs', 'status', 'categories'));
     }
+
+    public function createActivity9(Request $request)
+    {
+        $result = [
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'status_id' => $request->input('status_id'),
+            'category_id' => $request->input('category_id'),
+        ];
+
+        $response = Blog::create($result);
+
+        $data = "error";
+        if ($response) {
+            $data = Blog::with('category', 'stats')->find($response->id);
+        }
+        return $data;
+    }
+
+    public function blogsOneToOne() {}
 }

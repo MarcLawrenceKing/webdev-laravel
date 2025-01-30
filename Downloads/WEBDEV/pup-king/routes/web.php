@@ -84,9 +84,12 @@ Route::group(['prefix' => 'admin'], function () {
     })->name('dashboard');
 
     Route::get('activity9', [BlogController::class, 'retrieveActivity9']);
-    Route::post('activity9', [BlogController::class, 'blogSubmit'])->name('activity9.submit');
+    Route::post('activity9', [BlogController::class, 'createActivity9'])->name('activity9.create');
 });
 
 Route::get('/blog/data', [BlogController::class, 'sampleModel']);
 Route::get('/blog/data/{id}', [BlogController::class, 'sampleModel']);
 Route::get('/blog/data/{id}/{cat}', [BlogController::class, 'sampleModel']);
+
+
+Route::get('/try', [BlogController::class, 'index']);

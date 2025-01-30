@@ -19,7 +19,7 @@
         @endforeach
         @endif
 
-        <form method="POST" action="{{route('activity4.submit')}}">
+        <form method="POST" action="{{route('activity4.create')}}">
           @csrf
           <div class="mb-3 d-flex" style="gap: 5px; justify-content: end; align-items:center;">
             <label for="exampleInputEmail1" class="form-label mb-0"> Email:</label>
